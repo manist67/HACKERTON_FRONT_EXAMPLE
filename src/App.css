@@ -1,0 +1,75 @@
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.App > .calculator-wrapper {
+  margin: 100px auto 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 350px;
+  border: 1px solid #a0a0a0;
+  border-radius: 25px;
+  padding: 20px;
+  box-sizing: border-box;
+  background: #ffffff;
+}
+
+.App > .calculator-wrapper > p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  color: #303030;
+  margin: 10px 20px 0;
+}
+
+.App > .calculator-wrapper > .handler-wrapper {
+  display: flex;
+  width: 100%;
+  margin-top: 10px;
+}
+.App > .calculator-wrapper > .handler-wrapper > button {
+  flex: 1;
+  font-size: 18px;
+  margin: 5px;
+  border: 1px solid transparent;
+  background: #32c8a5;
+  height: 40px;
+  color: white;
+  border-radius: 10px;
+  outline: 0 !important;
+  cursor: pointer;
+}
+.App > .calculator-wrapper > .handler-wrapper > button:active {
+  background: #33a98d;
+}
+
+.App > .calculator-wrapper > p > label {
+  width: 80px;
+  font-size: 14px;
+}
+.App > .calculator-wrapper > p > input[type=text] {
+  padding: 5px;
+  height: 35px;
+  font-size: 16px;
+  box-sizing: border-box;
+  border: 1px solid #505050;
+}
+
+.App > .log {
+  text-align: left;
+  width: 350px;
+}
+
+
+.App > .log > p {
+  margin: 0;
+}
+
+.App > .log > p.log-label {
+  font-weight: 600;
+}
