@@ -15,7 +15,6 @@ class App extends React.Component {
 
     this.changeOp1 = this.changeOp1.bind(this);
     this.changeOp2 = this.changeOp2.bind(this);
-    this.clickPlus = this.clickPlus.bind(this);
   }
 
   componentDidMount() {
@@ -50,30 +49,31 @@ class App extends React.Component {
     this.setState({op2: event.target.value});
   }
 
-  async clickPlus() {
-    const { op1, op2, log } = this.state;
-    try {
-      this.validator(op1, op2);
-    } catch (e) {
-      alert("입력값을 확인해주세요!");
-      return;
-    }
-
-    let server;
-    try {
-      server = await Axios.post('http://localhost:8080/math/add', {
-        op1, op2
-      });
-
-    } catch(e) {
-      console.log(e);
-      alert("서버를 확인해주세요!");
-      return;
-    }
+  calculate (url) {
+    return async () => {
+        const { op1, op2, log } = this.state;
+        try {
+          this.validator(op1, op2);
+        } catch (e) {
+          alert("입력값을 확인해주세요!");
+          return;
+        }
     
-    log.push(server.data.expression + " = " + server.data.result);
-    this.setState({result: server.data.result, log});
-    console.log(server);
+        let server;
+        try {
+          server = await Axios.post(url, {
+            op1, op2
+          });
+    
+        } catch(e) {
+          console.log(e);
+          alert("서버를 확인해주세요!");
+          return;
+        }
+        
+        log.push(server.data.expression + " = " + server.data.result);
+        this.setState({result: server.data.result, log});
+    }
   }
   
   validator(op1, op2) {
@@ -98,11 +98,11 @@ class App extends React.Component {
             <input type="text" id="op2" className="op2" value={this.state.op2} onChange={this.changeOp2}/>
           </p>
           <div className="handler-wrapper">
-            <button onClick={this.clickPlus}>+</button>
-            <button>-</button>
-            <button>*</button>
-            <button>/</button>
-            <button>%</button>
+            <button onClick={this.calculate("http://localhost:8080/math/add")}>+</button>
+            <button onClick={this.calculate("http://localhost:8080/math/minus")}>-</button>
+            <button onClick={this.calculate("http://localhost:8080/math/multiply")}>*</button>
+            <button onClick={this.calculate("http://localhost:8080/math/divide")}>/</button>
+            <button onClick={this.calculate("http://localhost:8080/math/moduler")}>%</button>
           </div>
         </div>
         <div className="log">
